@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbatim Rule Tagger: tag survey comments and ticket text with your own keyword rules</title>
+<meta name="description" content="Tag thousands of survey verbatims and ticket comments with your own keyword rules. Transparent, editable, multi-label, with hit counts, co-occurrence and a seeded audit sample. No AI black box, no upload.">
+<meta name="keywords" content="tag survey comments by keyword, categorize open text responses spreadsheet, verbatim coding tool free, text tagging rules CSV">
+<meta name="author" content="Amir Hussain">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aamirtechs.github.io/verbatim-rule-tagger/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#0b1f3a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Verbatim Rule Tagger">
+<meta property="og:description" content="Tag thousands of survey verbatims and ticket comments with your own keyword rules. Transparent, editable, multi-label, with hit counts, co-occurrence and a seeded audit sample. No AI black box, no upload.">
+<meta property="og:url" content="https://aamirtechs.github.io/verbatim-rule-tagger/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Verbatim Rule Tagger">
+<meta name="twitter:description" content="Tag thousands of survey verbatims and ticket comments with your own keyword rules. Transparent, editable, multi-label, with hit counts, co-occurrence and a seeded audit sample. No AI black box, no upload.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Verbatim Rule Tagger","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Amir Hussain","url":"https://aamirtechs.com"},"url":"https://aamirtechs.github.io/verbatim-rule-tagger/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>:root{--navy:#0b1f3a;--navy2:#122c50;--gold:#d4a72c;--ink:#16233a;--muted:#5a6a84;--line:#e3e9f2;--bg:#f6f8fb;--card:#ffffff}
+*{box-sizing:border-box}body{margin:0;font-family:'Plus Jakarta Sans',Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:44px 20px 36px;text-align:center}
+header h1{font-family:Sora,Arial,sans-serif;font-size:2rem;margin:0 0 10px}header h1 span{color:var(--gold)}
+header p{max-width:640px;margin:0 auto 14px;color:#dbe4f2}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.stats span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:999px;font-size:.85rem}
+main{max-width:920px;margin:-18px auto 30px;padding:0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 6px 24px rgba(11,31,58,.07)}
+label{display:block;font-weight:700;margin:14px 0 6px;font-size:.92rem}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+textarea{min-height:110px;font-family:ui-monospace,Menlo,monospace;font-size:.85rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.row{grid-template-columns:1fr}}
+.btn-run{background:var(--gold);color:var(--navy);border:0;padding:12px 22px;border-radius:9px;font-weight:800;font-size:1rem;cursor:pointer;margin-top:18px}
+.btn-dl{background:var(--navy);color:#fff;border:0;padding:10px 16px;border-radius:8px;font-weight:700;cursor:pointer;margin:10px 8px 0 0}
+.privacy{color:var(--muted);font-size:.88rem;margin-top:14px}
+.msg{margin-top:14px;font-weight:700}.err{color:#b3261e}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.9rem}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left}th{background:#eef3fa}
+section.info{max-width:920px;margin:0 auto 30px;padding:0 16px}section.info h2{font-family:Sora,Arial,sans-serif}
+footer{background:var(--navy);color:#cdd9ec;text-align:center;padding:26px 16px;font-size:.9rem}footer a{color:var(--gold)}
+pre.out{background:#0b1f3a;color:#e8eefc;padding:14px;border-radius:10px;overflow:auto;max-height:300px;font-size:.82rem;white-space:pre-wrap}
+.best{background:#fdf3d7;font-weight:700}.flag{color:#b3261e;font-weight:700}mark{background:#ffe58a}</style>
+</head>
+<body>
+<header>
+<h1>Verbatim <span>Rule Tagger</span></h1>
+<p>Tag thousands of survey verbatims and ticket comments with your own keyword rules: transparent, editable, no AI black box and no upload.</p>
+<div class="stats"><span>Free</span><span>100% in your browser</span><span>No sign-up</span></div>
+</header>
+<main>
+<div class="card">
+
+<label for="data">Comments CSV (header row with an id column and a text/comment column)</label>
+<textarea id="data">id,comment
+1,Delivery was fast but the box arrived damaged
+2,I was charged twice for the same order and need a refund
+3,Support agent was quick and helpful
+4,Charged twice and still no delivery
+5,Everything was fine no complaints</textarea>
+<label for="rules">Rules, one per line: Label = any: words | all: words | not: words, or Label = regex: /pattern/</label>
+<textarea id="rules">Speed = any: fast, quick
+Double charge = all: charged, twice
+Billing = any: charged | not: refund
+Damage = any: damaged, broken</textarea>
+<div class="row">
+<div><label for="sampleN">Audit sample size</label><input id="sampleN" type="number" value="3" min="0"></div>
+<div><label for="seed">Audit sample seed</label><input id="seed" type="number" value="42"></div>
+</div>
+<button class="btn-run" id="run">Tag comments</button>
+
+<p class="privacy">Runs 100% in your browser. Your files never leave this device.</p>
+<div class="msg" id="msg"></div>
+<div id="results"></div>
+</div>
+</main>
+<section class="info">
+<h2>How it works</h2>
+<ul>
+<li>CSV in: an id column plus a text column of survey verbatims or ticket comments.</li>
+<li>Rule editor: label = any / all / not keywords, or a regex rule with clear error reporting.</li>
+<li>Multi-label matching in rule order, with hit counts and percentages per label.</li>
+<li>Co-occurrence table shows which labels tend to appear together.</li>
+<li>A deterministic seeded audit sample lets a second reviewer check the same records, and everything exports as a tagged CSV.</li>
+</ul>
+</section>
+<footer>
+<p>Built by Amir Hussain, operations manager and founder of <a href="https://aamirtechs.com" target="_blank" rel="noopener">AamirTechs: operations, customer support and e-commerce services</a>.</p>
+<p><a href="https://github.com/aamirtechs" target="_blank" rel="noopener">More open source tools on GitHub</a></p>
+</footer>
+<script src="src/logic.js"></script>
+<script>
+function download(name, text, type) {
+  var blob = new Blob([text], { type: type || "text/plain;charset=utf-8" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 500);
+}
+function esc(s) { return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+var L = window.VerbatimRuleTagger;
+var lastTagged = null;
+document.getElementById("run").addEventListener("click", function () {
+  var msg = document.getElementById("msg"); var res = document.getElementById("results");
+  msg.textContent = ""; msg.className = "msg"; res.innerHTML = "";
+  var parsed = L.parseRecords(document.getElementById("data").value, {});
+  var pr = L.parseRules(document.getElementById("rules").value);
+  var problems = parsed.errors.concat(pr.errors);
+  if (!parsed.records.length) { msg.textContent = "No records found in the CSV."; msg.className = "msg err"; return; }
+  lastTagged = L.tagRecords(parsed.records, pr.rules);
+  var html = "";
+  if (problems.length) html += '<p class="flag">' + problems.map(esc).join("<br>") + "</p>";
+  html += "<h3>Label hits</h3><table><tr><th>Label</th><th>Hits</th><th>Share</th></tr>";
+  L.labelStats(lastTagged).forEach(function (s) { html += "<tr><td>" + esc(s.label) + "</td><td>" + s.count + "</td><td>" + s.pct + "%</td></tr>"; });
+  html += "</table>";
+  var co = L.coOccurrence(lastTagged);
+  if (co.length) {
+    html += "<h3>Co-occurrence</h3><table><tr><th>Label pair</th><th>Records</th></tr>";
+    co.forEach(function (c) { html += "<tr><td>" + esc(c.pair) + "</td><td>" + c.count + "</td></tr>"; });
+    html += "</table>";
+  }
+  var n = parseInt(document.getElementById("sampleN").value, 10) || 0;
+  var sample = L.auditSample(lastTagged, n, parseInt(document.getElementById("seed").value, 10) || 42);
+  if (sample.length) {
+    html += "<h3>Audit sample (seeded, reproducible)</h3><table><tr><th>ID</th><th>Text</th><th>Tags</th></tr>";
+    sample.forEach(function (r) { html += "<tr><td>" + esc(r.id) + "</td><td>" + esc(r.text) + "</td><td>" + esc(r.tags.join("; ")) + "</td></tr>"; });
+    html += "</table>";
+  }
+  html += '<button class="btn-dl" id="dl">Download tagged CSV</button>';
+  res.innerHTML = html;
+  document.getElementById("dl").addEventListener("click", function () { download("tagged.csv", L.buildTaggedCSV(lastTagged), "text/csv;charset=utf-8"); });
+  msg.textContent = "Tagged " + lastTagged.length + " records with " + pr.rules.length + " rules.";
+});
+
+</script>
+</body>
+</html>
